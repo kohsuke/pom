@@ -6,6 +6,7 @@
   <packaging>pom</packaging>
   <name>Root POM for Kohsuke's projects</name>
   <url>http://kohsuke.org/</url>
+  <description>${project.name}</description>
 
   <scm>
     <connection>scm:git:git@github.com/kohsuke/${project.artifactId}.git</connection>
