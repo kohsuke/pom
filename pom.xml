@@ -54,6 +54,11 @@
           <releaseProfiles>release</releaseProfiles>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.0-beta-3</version>
+      </plugin>
     </plugins>
 
     <extensions>
@@ -74,7 +79,19 @@
       </extension>
     </extensions>
   </build>
-
+    
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </reporting>
+  
   <licenses>
     <license>
         <name>MIT license</name>
