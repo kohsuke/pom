@@ -26,14 +26,14 @@
       <p id="toplinks">Skip to: <a href="#content">Content</a> | <a href="#sidebar">Navigation</a> | <a href="#footer">Footer</a></p>
 		
             <h1 id="bannerLeft">
-          <a href="http://akuma.kohsuke.org/">
+          <a href="./">
     
-            Embeddable daemonization library
+            GitHub API for Java
     
             </a>
         </h1>
                 
-      <p id="slogan">Embeddable daemonization library</p>
+      <p id="slogan">GitHub API for Java</p>
     </div>
     <div id="breadcrumbs">
       <div class="xright">  </div>
@@ -45,27 +45,19 @@
     <div id="sidebar">
       <div id="navcolumn">
               <h2>
-          Akuma
+          Git Hub API for Java
         </h2><ul>
               
     <li class="none">
-              <strong>Usage</strong>
+              <strong>Introduction</strong>
         </li>
               
     <li class="none">
-              <a href="http://mvnrepository.com/artifact/org.kohsuke/akuma">Download</a>
+              <a href="http://mvnrepository.com/artifact/org.kohsuke/github-api">Download</a>
         </li>
               
     <li class="none">
-              <a href="https://github.com/kohsuke/akuma">Source code</a>
-        </li>
-              
-    <li class="none">
-              <a href="http://java.net/jira/browse/AKUMA">Issues</a>
-        </li>
-              
-    <li class="none">
-              <a href="http://www.opensource.org/licenses/mit-license.php">License</a>
+              <a href="https://github.com/kohsuke/github-api">Source code</a>
         </li>
           </ul>
       <h2>
@@ -163,6 +155,8 @@
                 
               
       
+            
+      
               
         <li class="collapsed">
               <a href="project-reports.html">Project Reports</a>
@@ -172,60 +166,13 @@
     </div>
     <div id="content">
       <div id="contentBox">
-        <div class="section"><h2>What is this?<a name="What_is_this"></a></h2><p>This is a Java library you can use in your application to support Unix daemonization. By taking advantages of POSIX API, this library lets you fork your process into background with proper daemonization steps.</p><p>It currently has several features, which we'll see in more details.</p></div><div class="section"><h2>Daemonization<a name="Daemonization"></a></h2><p>One feature of this library lets you fork a copy into background as a real Unix daemon, when started in the foreground. While doing this, you can also tweak JVM parameters or arguments.</p><p>Unlike the implementation based on <tt>Runtime.exec</tt>, this version correctly starts a new process group, changes the current directory, and closes file descriptors.</p><div class="section"><h3>How do I use it?<a name="How_do_I_use_it"></a></h3><p>Your integrate akuma into your main method like this:</p><div><pre>public static void main(String[] args) {
-    Daemonizer d = new Daemonizer();
-    if(d.isDaemonized()) {
-        // perform initialization as a daemon
-        // this involves in closing file descriptors, recording PIDs, etc.
-        d.init();
-    } else {
-        // if you are already daemonized, no point in daemonizing yourself again,
-        // so do this only when you aren't daemonizing.
-        if(you decide to launch a copy into background) {
-            d.daemonize(...);
-            System.exit(0);
-        }
-    }
-    // your normal main code follows
-    // this part can be executed in two ways
-    // 1) the user runs your process in the foreground
-    // 2) you decided to daemonize yourself, in which case the newly forked daemon will execute this code,
-    //    while the originally executed foreground Java process exits before it gets here.
-    ...
-}</pre></div></div></div><div class="section"><h2>JVM Re-launch<a name="JVM_Re-launch"></a></h2><p>Another feature of this library lets you re-launch a JVM with different VM options, without forking a new child process. This allows applications to tweak parameters that can be only changed at the JVM start-up time, such as heap size, diagnostic options, etc.</p><p>This overwrites the current process via POSIX <tt>exec</tt> call, so you'll retain the same stdin/stdout/stderr, and the same parent process. In comparison, Starting yourself with <tt>Runtime.exec</tt> will create a child process with different stdin/stdout, and when the parent is killed, the child is left behind without a controlling terminal.</p><div class="section"><h3>How do I use it?<a name="How_do_I_use_it"></a></h3><div><pre>JavaVMArguments args = JavaVMArguments.current();
-// tweak JVM launch options
-Daemon.selfExec(args);</pre></div></div></div><div class="section"><h2>Multi-process network server<a name="Multi-process_network_server"></a></h2><p>This library also lets you write a multi-process network server that listens on the same TCP/IP port. By forking multiple processes, you improve the robustness of your server --- a single destroyed process will not interrupt the service as other worker processes will take over the processing.</p><p>This is how Unix daemons have been traditionally written, such as Apache, yet it was impossible to do this in Java because it doesn't provide an API to let file descriptors to be inherited into children.</p><div class="section"><h3>How do I use it?<a name="How_do_I_use_it"></a></h3><p>Your integrate akuma into your main method like this:</p><div><pre>public class EchoServer extends NetworkServer {
-    public static void main(String[] args) throws Exception {
-        new EchoServer(args).run();
-    }
-
-    public EchoServer(String[] args) {
-        super(args);
-    }
-
-    @Override
-    protected void forkWorkers(JavaVMArguments args) throws Exception {
-        // fork two worker processes
-        forkWorkerThreads(args, 2);
-    }
-
-    @Override
-    protected ServerSocket createServerSocket() throws Exception {
-        // listen on port 12345
-        return new ServerSocket(12345);
-    }
-
-    @Override
-    protected void worker(ServerSocket ss) throws Exception {
-        byte[] buf = new byte[1024];
-        // run a simple echo server
-        while(true) {
-            Socket s = ss.accept();
-
-            ... serve this socket ... 
-        }
-    }
-}</pre></div><p><a class="externalLink" href="https://akuma.dev.java.net/nonav/xref/com/sun/akuma/EchoServer.html">The complete example</a> is avalable separately.</p></div></div><div class="section"><h2>Compatibility<a name="Compatibility"></a></h2><p>Because of the difficulty in Java and POSIX API to obtain the OS-level arguments of the process, not all POSIX-compliant operating systems are supported.</p><p>The supported platforms are:</p><ul><li>Linux (x86,amd64)</li><li>Solaris (x86,amd64,sparc,sparcv9)</li><li>Mac OS X</li></ul></div>
+        <div class="section"><h2>What is this?<a name="What_is_this"></a></h2><p>This library defines an object oriented representation of the GitHub API. The library doesn't yet cover the entirety of the GitHub API, but it's implemented with the right abstractions and libraries to make it very easy to improve the coverage.</p></div><div class="section"><h2>Sample Usage<a name="Sample_Usage"></a></h2><div><pre>GitHub github = GitHub.connect();
+GHRepository repo = github.createRepository(
+  &quot;new-repository&quot;,&quot;this is my new repository&quot;,
+  &quot;http://www.kohsuke.org/&quot;,true/*public*/);
+repo.addCollaborators(github.getUser(&quot;abayer&quot;),github.getUser(&quot;rtyler&quot;));
+repo.delete();</pre></div></div><div class="section"><h2>Credential<a name="Credential"></a></h2><p>This library allows the caller to supply the credential as parameters, but it also defines a common convention so that applications using this library will look at the consistent location. In this convention, the library looks at &quot;~/.github&quot; property file, which should have the following two values:</p><div><pre>login=kohsuke
+token=012345678</pre></div></div>
       </div>
     </div>
     <div id="footer">
@@ -238,8 +185,8 @@ Daemon.selfExec(args);</pre></div></div></div><div class="section"><h2>Multi-pro
 
   
   
-  &nbsp;| Last Published: 03/07/2012
-  &nbsp;| Version: 1.8
+  &nbsp;| Last Published: 03/08/2012
+  &nbsp;| Version: 1.18
 </div>
       <div class="clear">
         <hr/>
