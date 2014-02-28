@@ -72,6 +72,21 @@
           <nexusUrl>https://oss.sonatype.org/</nexusUrl>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.gmaven</groupId>
+        <artifactId>gmaven-plugin</artifactId>
+        <version>1.4</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <providerSelection>2.0</providerSelection>
+        </configuration>
+      </plugin>
     </plugins>
 
     <extensions>
