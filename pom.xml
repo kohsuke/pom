@@ -132,6 +132,31 @@
 
   <profiles>
     <profile>
+      <!--
+           historically this POM used this profile as the release profile, but now
+           I'm hearing that the standard profile is 'release-profile'. I'm leaving
+           this here in case projects that use this POM still refers to this profile.
+      -->
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
       <id>release-profile</id>
       <build>
         <plugins>
