@@ -108,7 +108,7 @@
       <extension>
         <groupId>org.kohsuke</groupId>
         <artifactId>wagon-gitsite</artifactId>
-        <version>0.3.5</version>
+        <version>0.3.8</version>
       </extension>
     </extensions>
   </build>
